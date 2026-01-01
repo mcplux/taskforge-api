@@ -32,7 +32,7 @@ services:
       - "${PORT}:${PORT}"
     develop:
       watch:
-        - path: ./backend
+        - path: .
           action: sync
           target: /app
           ignore: 
