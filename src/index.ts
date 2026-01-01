@@ -1,5 +1,6 @@
 import app from './app'
+import { env } from './config/env'
 
-app.listen(4000, () => {
-  console.log(`Server running on port 400`)
+app.listen(env.PORT, () => {
+  console.log(`Server running on port ${env.PORT}`)
 })
