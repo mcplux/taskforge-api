@@ -1,5 +1,9 @@
 import { Request, Response } from 'express'
-import { CreateTaskInput, TaskParams } from '../schemas/task.schema'
+import {
+  CreateTaskInput,
+  TaskParams,
+  UpdateTaskInput,
+} from '../schemas/task.schema'
 import { Task } from '../model/task'
 
 export const createTask = async (
@@ -60,6 +64,43 @@ export const getOneTask = async (req: Request<TaskParams>, res: Response) => {
     })
   } catch (error) {
     console.log('Error getting a task:', error)
+
+    return res.status(500).json({
+      success: false,
+      error: 'Something went wrong',
+    })
+  }
+}
+
+export const updateTask = async (
+  req: Request<TaskParams, {}, UpdateTaskInput>,
+  res: Response
+) => {
+  const { id } = req.params
+
+  try {
+    const task = await Task.findOneAndUpdate(
+      {
+        _id: id,
+      },
+      req.body,
+      {
+        new: true,
+      }
+    )
+    if (!task) {
+      return res.status(404).json({
+        success: false,
+        error: `Task with id ${id} not found`,
+      })
+    }
+
+    return res.status(200).json({
+      success: true,
+      data: task,
+    })
+  } catch (error) {
+    console.log('Error updating a task:', error)
 
     return res.status(500).json({
       success: false,

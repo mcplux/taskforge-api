@@ -1,12 +1,12 @@
 import { model, Schema } from 'mongoose'
 
-enum TaskStatus {
+export enum TaskStatus {
   PENDING = 'pending',
   IN_PROGRESS = 'in_progress',
   DONE = 'done',
 }
 
-enum TaskPriority {
+export enum TaskPriority {
   LOW = 'low',
   MEDIUM = 'medium',
   HIGH = 'high',
