@@ -1,9 +1,12 @@
 import { NextFunction, Request, Response } from 'express'
 import { ZodType, z } from 'zod'
 
-export const validateBody = (schema: ZodType) => {
+export const validateSchema = (
+  schema: ZodType,
+  property: 'body' | 'params' = 'body'
+) => {
   return (req: Request, res: Response, next: NextFunction) => {
-    const parsed = schema.safeParse(req.body)
+    const parsed = schema.safeParse(req[property])
     if (!parsed.success) {
       const flattenedErrors = z.flattenError(parsed.error)
       return res.status(400).json({
@@ -12,7 +15,7 @@ export const validateBody = (schema: ZodType) => {
       })
     }
 
-    req.body = parsed.data
+    req[property] = parsed.data
     next()
   }
 }
