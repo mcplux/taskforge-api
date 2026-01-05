@@ -24,3 +24,20 @@ export const createTask = async (
     })
   }
 }
+
+export const getUserTasks = async (req: Request, res: Response) => {
+  try {
+    const tasks = await Task.find()
+    return res.json({
+      success: true,
+      data: tasks,
+    })
+  } catch (error) {
+    console.log('Error getting tasks:', error)
+
+    return res.status(500).json({
+      success: false,
+      error: 'Something went wrong',
+    })
+  }
+}
