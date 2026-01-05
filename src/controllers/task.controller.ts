@@ -15,7 +15,7 @@ export const createTask = async (
       ...req.body,
     })
 
-    return res.json({
+    return res.status(200).json({
       success: true,
       data: task,
     })
@@ -32,7 +32,7 @@ export const createTask = async (
 export const getUserTasks = async (req: Request, res: Response) => {
   try {
     const tasks = await Task.find()
-    return res.json({
+    return res.status(200).json({
       success: true,
       data: tasks,
     })
@@ -101,6 +101,31 @@ export const updateTask = async (
     })
   } catch (error) {
     console.log('Error updating a task:', error)
+
+    return res.status(500).json({
+      success: false,
+      error: 'Something went wrong',
+    })
+  }
+}
+
+export const deleteTask = async (req: Request<TaskParams>, res: Response) => {
+  const { id } = req.params
+
+  try {
+    const deletedDocument = await Task.findOneAndDelete({ _id: id })
+    if (!deletedDocument) {
+      return res.status(404).json({
+        success: false,
+        error: `Task with id ${id} not found`,
+      })
+    }
+
+    return res.status(200).json({
+      success: true,
+    })
+  } catch (error) {
+    console.log('Error deleting a task:', error)
 
     return res.status(500).json({
       success: false,

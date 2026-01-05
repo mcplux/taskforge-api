@@ -1,6 +1,7 @@
 import { Router } from 'express'
 import {
   createTask,
+  deleteTask,
   getOneTask,
   getUserTasks,
   updateTask,
@@ -22,6 +23,11 @@ taskRouter.patch(
   validateSchema(taskParamsSchema, 'params'),
   validateSchema(updateTaskSchema, 'body'),
   updateTask
+)
+taskRouter.delete(
+  '/:id',
+  validateSchema(taskParamsSchema, 'params'),
+  deleteTask
 )
 
 export default taskRouter
