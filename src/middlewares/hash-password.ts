@@ -1,9 +1,9 @@
 import bcrypt from 'bcryptjs'
 import { NextFunction, Request, Response } from 'express'
-import { registerInput } from '../schemas/auth.schema'
+import { RegisterInput } from '../schemas/auth.schema'
 
 export const hashPassword = async (
-  req: Request<{}, {}, registerInput>,
+  req: Request<{}, {}, RegisterInput>,
   res: Response,
   next: NextFunction
 ) => {

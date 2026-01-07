@@ -13,6 +13,7 @@ const envShcema = z.object({
   NODE_ENV: z
     .enum(['development', 'test', 'production'])
     .default('development'),
+  ACCESS_JWT_SECRET: z.string().min(15),
 
   // MongoDB
   MONGO_USER: z.string().min(1, 'MONGO_USER is required'),

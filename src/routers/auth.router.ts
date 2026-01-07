@@ -1,8 +1,8 @@
 import { Router } from 'express'
-import { register } from '../controllers/auth.controller'
+import { login, register } from '../controllers/auth.controller'
 import { validateSchema } from '../middlewares/validate-schema'
-import { registerSchema } from '../schemas/auth.schema'
-import { hashPassword } from '../middlewares/hass-password'
+import { loginSchema, registerSchema } from '../schemas/auth.schema'
+import { hashPassword } from '../middlewares/hash-password'
 
 const authRouter = Router()
 
@@ -12,5 +12,7 @@ authRouter.post(
   hashPassword,
   register
 )
+
+authRouter.post('/login', validateSchema(loginSchema), login)
 
 export default authRouter
