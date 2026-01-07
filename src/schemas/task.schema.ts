@@ -1,5 +1,5 @@
 import z from 'zod'
-import { TaskPriority, TaskStatus } from '../model/task'
+import { TaskPriority, TaskStatus } from '../models/task'
 
 export const createTaskSchema = z.object({
   title: z.string().min(1),

@@ -4,7 +4,7 @@ import {
   TaskParams,
   UpdateTaskInput,
 } from '../schemas/task.schema'
-import { Task } from '../model/task'
+import { Task } from '../models/task'
 
 export const createTask = async (
   req: Request<{}, {}, CreateTaskInput>,
