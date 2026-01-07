@@ -7,9 +7,10 @@
     "esModuleInterop": true,
     "strict": true,
     "forceConsistentCasingInFileNames": true,
+    "moduleResolution": "node",
     "skipLibCheck": true,
     "declaration": true,
     "sourceMap": true
   },
-  "include": ["src/**/*.ts"]
+  "include": ["src/**/*.ts", "src/**/*.d.ts"]
 }
