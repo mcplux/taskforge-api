@@ -13,11 +13,14 @@ export const createTask = async (
   try {
     const task = await Task.create({
       ...req.body,
+      user: req.user!._id,
     })
+
+    const populatedTask = await task.populate('user')
 
     return res.status(200).json({
       success: true,
-      data: task,
+      data: populatedTask,
     })
   } catch (error) {
     console.log('Error creating a task:', error)
@@ -31,7 +34,7 @@ export const createTask = async (
 
 export const getUserTasks = async (req: Request, res: Response) => {
   try {
-    const tasks = await Task.find()
+    const tasks = await Task.find({ user: req.user!._id }).populate('user')
     return res.status(200).json({
       success: true,
       data: tasks,
@@ -50,7 +53,11 @@ export const getOneTask = async (req: Request<TaskParams>, res: Response) => {
   const { id } = req.params
 
   try {
-    const task = await Task.findOne({ _id: id })
+    const task = await Task.findOne({
+      _id: id,
+      user: req.user!._id,
+    }).populate('user')
+
     if (!task) {
       return res.status(404).json({
         success: false,
@@ -82,12 +89,13 @@ export const updateTask = async (
     const task = await Task.findOneAndUpdate(
       {
         _id: id,
+        user: req.user!._id,
       },
       req.body,
       {
         new: true,
       }
-    )
+    ).populate('user')
     if (!task) {
       return res.status(404).json({
         success: false,
@@ -113,7 +121,10 @@ export const deleteTask = async (req: Request<TaskParams>, res: Response) => {
   const { id } = req.params
 
   try {
-    const deletedDocument = await Task.findOneAndDelete({ _id: id })
+    const deletedDocument = await Task.findOneAndDelete({
+      _id: id,
+      user: req.user!._id,
+    })
     if (!deletedDocument) {
       return res.status(404).json({
         success: false,

@@ -22,6 +22,11 @@ const taskSchema = new Schema(
       enum: Object.values(TaskPriority),
       default: TaskPriority.LOW,
     },
+    user: {
+      type: Schema.Types.ObjectId,
+      ref: 'User',
+      required: true,
+    },
     dueDate: {
       type: String,
     },

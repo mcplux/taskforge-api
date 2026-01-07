@@ -3,6 +3,7 @@ export interface ITask {
   description?: string
   status: TaskStatus
   priority: TaskPriority
+  user: string
   dueDate?: Date
 }
 
