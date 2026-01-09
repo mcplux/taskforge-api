@@ -74,7 +74,7 @@ You can also install new dependencies locally the Docker image will be rebuilt a
 
 ## 📡 API Documentation
 
-Upcomming...
+Upcoming...
 
 ## ❤️ Author
 
