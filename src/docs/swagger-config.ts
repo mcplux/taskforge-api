@@ -8,6 +8,15 @@ const swaggerConfig = swaggerJSDoc({
       version: '1.0.0',
       description: 'TaskForge API documentation',
     },
+    components: {
+      securitySchemes: {
+        auth: {
+          type: 'http',
+          scheme: 'bearer',
+          bearerFormat: 'JWT',
+        },
+      },
+    },
   },
   apis: ['src/routers/**/*.ts', 'src/docs/**/*.ts'],
 })

@@ -35,4 +35,21 @@
  *        password:
  *          type: string
  *          example: secret_password
+ *
+ *    CreateTaskRequest:
+ *      type: object
+ *      required:
+ *        - title
+ *      properties:
+ *        title:
+ *          type: string
+ *          minLength: 1
+ *          example: Buy bread
+ *        description:
+ *          type: string
+ *          example: A very long description for this task
+ *        dueDate:
+ *          type: string
+ *          format: date
+ *          example: 2026-03-25
  */
