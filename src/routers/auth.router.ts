@@ -6,6 +6,25 @@ import { hashPassword } from '../middlewares/hash-password'
 
 const authRouter = Router()
 
+/**
+ * @openapi
+ * /api/auth/register:
+ *   post:
+ *     summary: Register a new user
+ *     tags:
+ *       - Auth
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/RegisterRequest'
+ *     responses:
+ *       201:
+ *         description: User registered successfully
+ *       400:
+ *         description: Validation error
+ */
 authRouter.post(
   '/register',
   validateSchema(registerSchema, 'body'),
