@@ -32,6 +32,25 @@ authRouter.post(
   register
 )
 
-authRouter.post('/login', validateSchema(loginSchema), login)
+/**
+ * @openapi
+ * /api/auth/login:
+ *   post:
+ *     summary: Authenticate user
+ *     tags:
+ *       - Auth
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/LoginRequest'
+ *     responses:
+ *       200:
+ *         description: User authenticated successfully
+ *       400:
+ *         description: Validation error
+ */
+authRouter.post('/login', validateSchema(loginSchema, 'body'), login)
 
 export default authRouter

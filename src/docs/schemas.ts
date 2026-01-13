@@ -21,4 +21,18 @@
  *          type: string
  *          minLength: 8
  *          example: secret_password
+ *
+ *    LoginRequest:
+ *      type: object
+ *      required:
+ *        - email
+ *        - password
+ *      properties:
+ *        email:
+ *          type: string
+ *          format: email
+ *          example: juan@test.com
+ *        password:
+ *          type: string
+ *          example: secret_password
  */
