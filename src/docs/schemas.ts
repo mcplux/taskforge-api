@@ -52,4 +52,32 @@
  *          type: string
  *          format: date
  *          example: 2026-03-25
+ *    UpdateTaskRequest:
+ *      type: object
+ *      properties:
+ *        title:
+ *          type: string
+ *          minLength: 1
+ *          example: Buy bread
+ *        description:
+ *          type: string
+ *          example: A very long description for this task
+ *        status:
+ *          type: string
+ *          enum:
+ *            - pending
+ *            - in-progress
+ *            - done
+ *          example: pending
+ *        priority:
+ *          type: string
+ *          enum:
+ *            - low
+ *            - medium
+ *            - high
+ *          example: low
+ *        dueDate:
+ *          type: string
+ *          format: date
+ *          example: 2026-03-25
  */

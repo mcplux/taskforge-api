@@ -45,14 +45,14 @@ export const login = async (
     if (!user) {
       return res.status(400).json({
         success: false,
-        error: 'Invalid credencials',
+        error: 'Invalid credentials',
       })
     }
     const isValidPassword = await bcrypt.compare(password, user.password)
     if (!isValidPassword) {
       return res.status(400).json({
         success: false,
-        error: 'Invalid credencials',
+        error: 'Invalid credentials',
       })
     }
 
@@ -75,7 +75,7 @@ export const login = async (
       },
     })
   } catch (error) {
-    console.log('Error loging in user:', error)
+    console.log('Error logging in user:', error)
 
     return res.status(500).json({
       success: false,
