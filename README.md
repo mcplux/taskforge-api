@@ -65,6 +65,7 @@ TaskForge API is a RESTful task management API focused on clean architecture, sc
 5. Useful links (default configuration):
 
    - **API**: http://localhost:4000/api
+   - **Docs**: http://localhost:4000/docs
    - **Mongo Express**: http://localhost:8081
 
 Once the containers are running, you can work directly on your local machine.  
@@ -74,7 +75,33 @@ You can also install new dependencies locally the Docker image will be rebuilt a
 
 ## 📡 API Documentation
 
-Upcoming...
+This API is fully documented using Swagger (OpenAPI) generated automatically from the code using `swagger-jsdoc`.
+
+### 📚 Interactive Documentation
+
+Once the server is running, you can explore and test all available endpoints via Swagger UI (default):
+
+```
+http://localhost:4000/docs
+```
+
+The Swagger UI includes:
+
+- Available endpoints and HTTP methods
+
+- Request parameters and payload schemas
+
+- Authentication requirements
+
+- Response formats and status codes
+
+- Example requests and responses
+
+### 🔐 Authentication
+
+Some endpoints require authentication.
+
+Swagger UI supports authenticated requests. Click Authorize and provide a JWT.
 
 ## ❤️ Author
 
