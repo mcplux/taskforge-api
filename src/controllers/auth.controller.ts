@@ -17,7 +17,7 @@ export const register = async (
 
     res.status(201).json({
       success: true,
-      code: ApiCode.USER_CREATED_SUCCESSFULLY,
+      code: ApiCode.USER_CREATED,
       data: { user: getUserResponse(user) },
     })
   } catch (error) {
@@ -75,7 +75,7 @@ export const login = async (
 
     return res.status(200).json({
       success: true,
-      code: ApiCode.USER_AUTHENTICATED_SUCCESSFULLY,
+      code: ApiCode.USER_AUTHENTICATED,
       data: {
         user: getUserResponse(user),
         accessToken,

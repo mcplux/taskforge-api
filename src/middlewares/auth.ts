@@ -2,13 +2,21 @@ import { NextFunction, Request, Response } from 'express'
 import jwt from 'jsonwebtoken'
 import { env } from '../config/env'
 import { User } from '../models/user'
+import { ApiCode, ApiResponse } from '../types/api-response.type'
 
-export const auth = async (req: Request, res: Response, next: NextFunction) => {
+export const auth = async (
+  req: Request,
+  res: Response<ApiResponse>,
+  next: NextFunction
+) => {
   const authHeader = req.headers.authorization
   if (!authHeader) {
     return res.status(401).json({
       success: false,
-      error: 'Missing authorization header',
+      code: ApiCode.UNAUTHORIZED,
+      details: {
+        token: ['Invalid or expired authorization token'],
+      },
     })
   }
 
@@ -16,7 +24,10 @@ export const auth = async (req: Request, res: Response, next: NextFunction) => {
   if (type != 'Bearer' || !token) {
     return res.status(401).json({
       success: false,
-      error: 'Invalid authorization format',
+      code: ApiCode.UNAUTHORIZED,
+      details: {
+        token: ['Invalid or expired authorization token'],
+      },
     })
   }
 
@@ -26,7 +37,10 @@ export const auth = async (req: Request, res: Response, next: NextFunction) => {
     if (!user) {
       return res.status(401).json({
         success: false,
-        error: 'Invalid or expired token',
+        code: ApiCode.UNAUTHORIZED,
+        details: {
+          token: ['Invalid or expired authorization token'],
+        },
       })
     }
     req.user = user
@@ -34,7 +48,10 @@ export const auth = async (req: Request, res: Response, next: NextFunction) => {
   } catch (error) {
     return res.status(401).json({
       success: false,
-      error: 'Invalid or expired token',
+      code: ApiCode.UNAUTHORIZED,
+      details: {
+        token: ['Invalid or expired authorization token'],
+      },
     })
   }
 }
