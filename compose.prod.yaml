@@ -1,17 +1,17 @@
 services:
   mongo:
     image: mongo:8
-    container_name: taskforge_mongo_dev
+    container_name: taskforge_mongo
     restart: always
     environment:
       - MONGO_INITDB_ROOT_USERNAME=${MONGO_USER}
       - MONGO_INITDB_ROOT_PASSWORD=${MONGO_PASSWORD}
     volumes:
-      - mongo_data_dev:/data/db
+      - mongo_data:/data/db
 
   mongo-express:
     image: mongo-express:latest
-    container_name: taskforge_mongo-express_dev
+    container_name: taskforge_mongo-express
     restart: always
     ports:
       - "${MONGO_EXPRESS_PORT}:8081"
@@ -27,27 +27,18 @@ services:
   api:
     build: 
       context: .
-    container_name: taskforge_api_dev
+      dockerfile: Dockerfile.prod
+    container_name: taskforge_api
     ports:
       - "${PORT}:${PORT}"
-    develop:
-      watch:
-        - path: .
-          action: sync
-          target: /app
-          ignore: 
-            - ./node_module
-            - ./dist
-        - path: ./package.json
-          action: rebuild
     env_file:
       - .env
     environment:
-      - NODE_ENV=development
+      - NODE_ENV=production
     depends_on:
       - mongo
-    command: npm run dev
+    command: node dist/index.js
 
 
 volumes:
-  mongo_data_dev:
+  mongo_data:

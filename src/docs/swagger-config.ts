@@ -1,4 +1,7 @@
 import swaggerJSDoc from 'swagger-jsdoc'
+import { env } from '../config/env'
+
+const sourceDir = env.NODE_ENV === 'production' ? 'dist' : 'src'
 
 const swaggerConfig = swaggerJSDoc({
   definition: {
@@ -18,7 +21,7 @@ const swaggerConfig = swaggerJSDoc({
       },
     },
   },
-  apis: ['src/routers/**/*.ts', 'src/docs/**/*.ts'],
+  apis: [`${sourceDir}/routers/**/*.{js,ts}`, `${sourceDir}/docs/**/*.{js,ts}`],
 })
 
 export default swaggerConfig
